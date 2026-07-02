@@ -3,11 +3,24 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import content from "@/lib/content";
 import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects";
+import { createMetadata } from "@/lib/seo";
 import MDXContent from "@/components/MDXContent";
 import { FadeIn } from "@/components/Motion";
 
 export async function generateStaticParams() {
   return getAllProjectSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
+  if (!project) return {};
+
+  return createMetadata({
+    title: project.title,
+    description: project.summary,
+    path: `/projects/${slug}`,
+  });
 }
 
 function formatPeriod(dateStart, dateEnd) {

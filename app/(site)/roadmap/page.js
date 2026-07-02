@@ -1,7 +1,14 @@
 import content from "@/lib/content";
 import { getRoadmapItems } from "@/lib/roadmap";
+import { createMetadata } from "@/lib/seo";
 import { SectionHeading, FadeIn } from "@/components/Motion";
 import MDXContent from "@/components/MDXContent";
+
+export const metadata = createMetadata({
+  title: content.roadmap.title,
+  description: content.roadmap.subtitle,
+  path: "/roadmap",
+});
 
 export default function RoadmapPage() {
   const items = getRoadmapItems();

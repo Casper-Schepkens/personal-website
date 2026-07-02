@@ -31,9 +31,6 @@ export default function HomePage() {
               <h1 className="font-display text-4xl font-normal tracking-tight sm:text-6xl text-balance">
                 Casper Schepkens
               </h1>
-              <p className="mt-2 font-display text-xl text-foreground/80">
-                Ondernemer
-              </p>
               <p className="mt-6 max-w-xl text-muted leading-relaxed">
                 {content.home.intro}
               </p>

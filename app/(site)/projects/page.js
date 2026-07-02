@@ -1,8 +1,15 @@
 import { Suspense } from "react";
 import content from "@/lib/content";
 import { getAllProjects, getAllTags } from "@/lib/projects";
+import { createMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/Motion";
 import ProjectFilters from "@/components/ProjectFilters";
+
+export const metadata = createMetadata({
+  title: content.projects.title,
+  description: content.projects.subtitle,
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   const projects = getAllProjects();

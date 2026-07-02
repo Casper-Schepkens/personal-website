@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Casper Schepkens",
-    "description": "Student, ondernemer en maker. Portfolio van projecten en accomplishments."
+    "description": "Student, ondernemer en bouwer. Ik laat zien waar ik mee bezig ben — van eigen producten tot freelance en alles ertussen."
   },
   "nav": {
     "home": "Home",
@@ -10,8 +10,8 @@
     "roadmap": "Roadmap"
   },
   "home": {
-    "tagline": "Student · Ondernemer",
-    "intro": "Ik bouw software, werk als freelancer en onderneem tegelijk. Deze site is mijn visitekaartje — wie ik ben, waar ik mee bezig ben, en wat ik heb gerealiseerd.",
+    "tagline": "Student · Ondernemer · Bouwer",
+    "intro": "Ik weet wat ik wil en ben constant bezig met serieuze projecten — software bouwen, ondernemen, freelance. Op deze site laat ik zien waar ik nu mee bezig ben en wat ik al heb neergezet.",
     "featuredTitle": "Uitgelichte projecten",
     "featuredSubtitle": "Waar ik nu energie in steek",
     "currentlyTitle": "Waar ik nu mee bezig ben",
@@ -21,7 +21,7 @@
   },
   "projects": {
     "title": "Projecten",
-    "subtitle": "Alles waar ik aan werk — van side projects tot client work",
+    "subtitle": "Alles waar ik aan werk — geen fluff, gewoon wat er speelt",
     "filterStatus": "Status",
     "filterTags": "Tags",
     "all": "Alles",
