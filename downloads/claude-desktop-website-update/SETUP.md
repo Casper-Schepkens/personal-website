@@ -1,80 +1,39 @@
 # Website Update — Claude Desktop setup
 
-## Wat je nodig hebt
+## Flow
 
-1. **Skill zip** — `website-update-claude-desktop.zip`
-2. **GitHub relay MCP** — draait op je site (`/api/mcp`) na Vercel deploy
-3. **GitHub PAT** + **MCP_BRIDGE_SECRET** — in Vercel env vars
-4. **Cursor** — GitHub-integratie voor `personal-website`
+```
+/website-update → MCP tool → Cursor webhook → Cloud Agent → draft PR
+```
 
-> De standaard GitHub-connector van Claude kan **geen issues aanmaken** (403). Daarom de eigen MCP relay.
+## Setup (3 stappen)
 
-## Stap 1 — Vercel env vars (eerst!)
+### 1. Cursor Automation
 
-Vercel dashboard → project → Settings → Environment Variables:
+[cursor.com/automations](https://cursor.com/automations) — zie `.cursor/automations/website-update.md` in de repo.
+
+Na opslaan: webhook URL + auth token → Vercel env vars.
+
+### 2. Vercel env vars + redeploy
 
 | Variable | Waarde |
 |----------|--------|
-| `GITHUB_PAT` | Fine-grained PAT, issues read/write op `personal-website` |
-| `GITHUB_REPO` | `Casper-Schepkens/personal-website` |
+| `CURSOR_AUTOMATION_WEBHOOK_URL` | van automation dashboard |
+| `CURSOR_AUTOMATION_AUTH_TOKEN` | van "Generate auth header" |
 | `MCP_BRIDGE_SECRET` | `openssl rand -hex 32` |
 
-Redeploy. Zie `website-update/references/github-relay-setup.md` in de zip.
+### 3. Claude
 
-## Stap 2 — Skill uploaden
+- Upload **`website-update-claude-desktop.zip`** (Skills)
+- Connector: `https://casperschepkens.nl/api/mcp` + Bearer secret
+- Naam connector: `cursor-webhook`
 
-1. Claude Desktop → **Settings** → **Customize** → **Skills**
-2. **Code execution** aan
-3. **+** → **Upload a skill** → `website-update-claude-desktop.zip`
-4. Skill **aan**
-
-## Stap 3 — MCP connector toevoegen
-
-**Optie A — Custom connector (claude.ai / Desktop):**
-
-1. **Settings** → **Connectors** → **Add custom connector**
-2. URL: `https://casperschepkens.nl/api/mcp`
-3. Auth: **Bearer** = je `MCP_BRIDGE_SECRET`
-4. Naam: `github-relay`
-
-**Optie B — mcp-remote (Claude Desktop config):**
-
-```json
-{
-  "github-relay": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "mcp-remote",
-      "https://casperschepkens.nl/api/mcp",
-      "--header",
-      "Authorization: Bearer JOUW_MCP_BRIDGE_SECRET"
-    ]
-  }
-}
-```
-
-Bestand (macOS): `~/Library/Application Support/Claude/claude_desktop_config.json`
-
-## Stap 4 — Cursor
-
-[cursor.com/dashboard](https://cursor.com/dashboard) → GitHub → `personal-website`
-
-## Stap 5 — Test
+## Test
 
 ```
 /website-update
 
-Zet IKnowright summary op: "Test via GitHub relay"
+Zet IKnowright summary op: "Test via webhook"
 ```
 
-Verwacht: MCP geeft issue-URL → `@cursor` comment → draft PR.
-
-## Troubleshooting
-
-| Probleem | Fix |
-|----------|-----|
-| MCP 401 | Secret in Vercel = secret in connector |
-| GitHub 403 in MCP | PAT permissions checken |
-| Claude gebruikt verkeerde GitHub tool | Zeg: gebruik `website_update_dispatch` |
-| `@cursor` reageert niet | Cursor GitHub-integratie |
+Zie `website-update/references/webhook-setup.md` in de zip voor details.

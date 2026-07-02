@@ -1,5 +1,5 @@
-# Claude → Cursor via GitHub relay MCP
+# Claude → Cursor
 
-De standaard GitHub-connector van Claude kan **geen issues schrijven** (403). Gebruik de **eigen MCP-server** op `/api/mcp`.
+Gebruik de **webhook-aanpak**: Claude roept `website_update_dispatch` → `/api/mcp` → Cursor Automation webhook.
 
-Zie `github-workflow.md` en `github-relay-setup.md` voor volledige setup.
+Zie `webhook-setup.md`.

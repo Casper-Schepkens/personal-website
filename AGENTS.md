@@ -20,10 +20,11 @@ Single service: the Next.js app.
 
 ### Website content updates
 
-Content updates use the `website-update` skills with a **GitHub relay MCP** (`/api/mcp`):
+Claude → MCP (`/api/mcp`) → Cursor Automation webhook → Cloud Agent → draft PR.
 
-- **Claude:** `.claude/skills/website-update/` — calls `website_update_dispatch` MCP tool
-- **Server:** `lib/github-relay.js` + `app/api/[transport]/route.js` — creates issues with PAT
-- **Cursor:** `.cursor/skills/website-update/` — executes changes when triggered via `@cursor`
+- **Claude skill:** `.claude/skills/website-update/`
+- **Cursor skill:** `.cursor/skills/website-update/`
+- **Automation template:** `.cursor/automations/website-update.md`
+- **Setup:** `references/webhook-setup.md`
 
-Requires Vercel env: `GITHUB_PAT`, `MCP_BRIDGE_SECRET`. See `references/github-relay-setup.md`.
+Vercel env: `CURSOR_AUTOMATION_WEBHOOK_URL`, `CURSOR_AUTOMATION_AUTH_TOKEN`, `MCP_BRIDGE_SECRET`.
