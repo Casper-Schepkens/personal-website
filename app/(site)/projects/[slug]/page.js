@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import content from "@/lib/content";
 import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects";
 import { createMetadata } from "@/lib/seo";
 import MDXContent from "@/components/MDXContent";
+import ProjectCoverImage from "@/components/ProjectCoverImage";
 import { FadeIn } from "@/components/Motion";
 
 export async function generateStaticParams() {
@@ -43,16 +43,15 @@ export default async function ProjectDetailPage({ params }) {
       </FadeIn>
 
       <FadeIn delay={0.05} className="mt-8">
-        <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-surface-hover">
-          <Image
-            src={project.coverImage}
-            alt={project.title}
-            fill
-            className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 768px"
-          />
-        </div>
+        <ProjectCoverImage
+          src={project.coverImage}
+          alt={project.title}
+          aspect="16/9"
+          coverFit={project.coverFit}
+          priority
+          sizes="(max-width: 768px) 100vw, 768px"
+          className="rounded-xl"
+        />
       </FadeIn>
 
       <FadeIn delay={0.1} className="mt-10">

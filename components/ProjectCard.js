@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import content from "@/lib/content";
+import ProjectCoverImage from "@/components/ProjectCoverImage";
 
 export default function ProjectCard({ project, index = 0 }) {
   return (
@@ -15,16 +15,16 @@ export default function ProjectCard({ project, index = 0 }) {
       whileHover={{ y: -4 }}
       className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-shadow hover:shadow-md"
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-surface-hover">
-        <Image
+      <div className="relative">
+        <ProjectCoverImage
           src={project.coverImage}
           alt={project.title}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          coverFit={project.coverFit}
           sizes="(max-width: 768px) 100vw, 50vw"
+          hover
         />
         <span
-          className={`absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-xs font-medium ${
+          className={`absolute top-3 left-3 z-10 rounded-full px-2.5 py-0.5 text-xs font-medium ${
             project.status === "active"
               ? "bg-foreground text-background"
               : "bg-surface-hover text-muted border border-border"
