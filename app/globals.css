@@ -12,6 +12,20 @@
   --color-border: #d4d4d4;
   --color-surface: #f2f2f2;
   --color-surface-hover: #dedede;
+  --color-logo-tile: #f0f0f0;
+}
+
+.dark {
+  --color-accent: #d1d1d1;
+  --color-accent-hover: #ededed;
+
+  --color-background: #2a2a2a;
+  --color-foreground: #d1d1d1;
+  --color-muted: #9a9a9a;
+  --color-border: #3d3d3d;
+  --color-surface: #333333;
+  --color-surface-hover: #3a3a3a;
+  --color-logo-tile: #303030;
 }
 
 @tailwind base;

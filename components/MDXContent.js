@@ -15,6 +15,19 @@ const components = {
     <a className="text-foreground underline underline-offset-4 hover:opacity-80" target="_blank" rel="noopener noreferrer" {...props} />
   ),
   strong: (props) => <strong className="font-semibold text-foreground" {...props} />,
+  img: (props) => (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img className="my-6 w-full rounded-xl border border-border" {...props} />
+  ),
+  ImageRow: ({ cols = 2, children }) => (
+    <div
+      className={`my-6 grid gap-3 ${
+        cols === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2"
+      } [&_img]:my-0`}
+    >
+      {children}
+    </div>
+  ),
 };
 
 export default function MDXContent({ source }) {
