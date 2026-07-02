@@ -51,6 +51,10 @@ lib/roadmap.js         → roadmap data ophalen
 public/images/logo.png → CS logo
 ```
 
+## Backlog
+
+Open [`BACKLOG.md`](./BACKLOG.md) voor de volledige v1-takenlijst (prioriteit hoog → laag).
+
 ## Cover images
 
 Plaats afbeeldingen in `public/images/` en verwijs ernaar in frontmatter:
