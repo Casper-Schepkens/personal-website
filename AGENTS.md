@@ -20,9 +20,13 @@ Single service: the Next.js app.
 
 ### Website content updates
 
-Content updates (project phases, roadmap, UI text) use the `website-update` skills:
+Claude → MCP (`scripts/cursor-webhook-mcp.mjs` lokaal, of optioneel `/api/mcp` op casperschepkens.com) → Cursor Automation webhook → draft PR.
 
-- **Claude:** `.claude/skills/website-update/` — creates GitHub issue + `@cursor` comment
-- **Cursor:** `.cursor/skills/website-update/` — executes changes when triggered via `@cursor` on a `website-update` issue
+- **Claude skill:** `.claude/skills/website-update/`
+- **Cursor skill:** `.cursor/skills/website-update/`
+- **Automation template:** `.cursor/automations/website-update.md`
+- **Setup:** `references/webhook-setup.md`
 
-See `.cursor/skills/website-update/references/github-workflow.md` for setup.
+Vercel env: `CURSOR_AUTOMATION_WEBHOOK_URL`, `CURSOR_AUTOMATION_AUTH_TOKEN`, `MCP_BRIDGE_SECRET` (alleen als je `/api/mcp` gebruikt).
+
+**Automation agent prompt:** `.cursor/automations/website-update-agent-instructions.md`

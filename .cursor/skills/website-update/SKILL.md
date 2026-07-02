@@ -1,6 +1,6 @@
 ---
 name: website-update
-description: "Voer content-updates door op de Casper Schepkens portfolio-site (Next.js + MDX). Gebruik bij @cursor mentions op GitHub issues met label website-update, projectfase-wijzigingen, roadmap-items, UI-teksten, of gestructureerde update-specs van Claude."
+description: "Voer content-updates door op de Casper Schepkens portfolio-site (Next.js + MDX). Gebruik bij webhook-triggers van Cursor Automations, projectfase-wijzigingen, roadmap-items, UI-teksten, of update-specs van Claude."
 paths: content/**,messages/**,.cursor/skills/website-update/**
 disable-model-invocation: true
 ---
@@ -9,30 +9,26 @@ disable-model-invocation: true
 
 Deze site is **content-driven**: geen database. Wijzigingen zitten in MDX-bestanden en `messages/nl.json`.
 
-## Trigger: GitHub issue + @cursor
+## Trigger: Cursor Automation webhook
 
-Je bent gestart via een **`@cursor` comment op een GitHub issue**. Volg deze stappen eerst:
+Je bent gestart via een **webhook** met `update_spec` in de payload. Volg deze stappen:
 
-1. **Lees het issue** — titel begint met `[website-update]`
-2. **Haal de update-spec op** — JSON tussen `<!-- website-update-spec -->` en `<!-- /website-update-spec -->` markers
-3. **Valideer** — moet `version: 1`, `summary`, en minstens één item in `changes[]` hebben
-4. **Voer de wijzigingen uit** — zie workflow hieronder
-5. **Afronden:**
+1. **Lees de payload** — zoek `update_spec` (version 1, summary, changes[])
+2. **Valideer** — minstens één change
+3. **Voer wijzigingen uit** — zie workflow hieronder
+4. **Afronden:**
    - `npm run lint`
    - Commit op `cursor/website-update-*` branch
-   - Open een **draft PR** (titel: `website-update: {summary}`)
-   - Comment op het issue met PR-link en korte samenvatting van wijzigingen
-   - **Sluit het issue niet** — Casper reviewt en merged
+   - Open **draft PR**
+   - Rapporteer in PR-beschrijving wat er gewijzigd is
 
-Als de markers ontbreken: zoek een ` ```json ` blok met `version` en `changes`, of parse de issue-beschrijving en bouw zelf een spec (minimale diff).
+Als `update_spec` ontbreekt: stop en rapporteer wat er mis is.
 
 ## Wanneer deze skill gebruiken
 
-- `@cursor` op een `website-update` issue (primair)
-- Project gaat van `active` → `completed` (of omgekeerd)
-- Nieuw project of roadmap-item
-- UI-teksten of about-skills bijwerken
-- Gestructureerde update-spec van Claude of andere AI
+- Webhook-trigger van Cursor Automation (primair)
+- Projectfase-wijzigingen, roadmap, UI-teksten
+- Gestructureerde update-spec van Claude
 
 ## Kernregels
 
@@ -101,7 +97,7 @@ Rapporteer in PR-beschrijving en issue-comment:
 
 - `references/update-spec.md` — JSON-schema
 - `references/update-examples.md` — voorbeelden
-- `references/github-workflow.md` — Claude → GitHub → @cursor flow
+- `references/webhook-setup.md` — setup (automation + Vercel + Claude connector)
 - `references/content-schema.md` — frontmatter-velden
 
 ## Wat je NIET doet
@@ -109,4 +105,4 @@ Rapporteer in PR-beschrijving en issue-comment:
 - Geen wijzigingen aan `app/`, `components/`, `lib/` tenzij expliciet gevraagd
 - Geen Engelse UI-teksten
 - Geen nieuwe dependencies
-- Issue niet sluiten — alleen PR openen
+- Issue niet sluiten (alleen bij GitHub-fallback)
