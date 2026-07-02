@@ -1,3 +1,4 @@
+import { siteConfig } from "@/lib/site";
 import content from "@/lib/content";
 
 export default function Footer() {
@@ -14,13 +15,13 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <a
-              href="mailto:casper.schepkens@icloud.com"
+              href={`mailto:${siteConfig.email}`}
               className="text-sm text-muted hover:text-foreground transition-colors"
             >
-              casper.schepkens@icloud.com
+              {siteConfig.email}
             </a>
             <a
-              href="https://linkedin.com/in/casperschepkens"
+              href={siteConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg border border-border px-3 py-1.5 text-sm text-muted hover:text-foreground hover:border-foreground/30 transition-colors"

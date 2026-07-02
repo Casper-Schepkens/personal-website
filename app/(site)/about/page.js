@@ -1,5 +1,12 @@
 import content from "@/lib/content";
+import { createMetadata } from "@/lib/seo";
 import { SectionHeading, FadeIn } from "@/components/Motion";
+
+export const metadata = createMetadata({
+  title: content.about.title,
+  description: content.about.subtitle,
+  path: "/about",
+});
 
 export default function AboutPage() {
   const { skills } = content.about;

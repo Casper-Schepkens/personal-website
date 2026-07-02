@@ -1,23 +1,20 @@
 import content from "@/lib/content";
+import { createMetadata } from "@/lib/seo";
+import JsonLd from "@/components/JsonLd";
 import "./globals.css";
 
 export const metadata = {
+  ...createMetadata({ description: content.meta.description }),
   title: {
     default: content.meta.siteName,
     template: `%s | ${content.meta.siteName}`,
   },
-  description: content.meta.description,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="nl" suppressHydrationWarning>
+    <html lang="nl">
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var dark=t?t==='dark':d;document.documentElement.classList.toggle('dark',dark);}catch(e){}})();`,
-          }}
-        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -32,6 +29,7 @@ export default function RootLayout({ children }) {
           "--font-display": "'Playfair Display', Georgia, serif",
         }}
       >
+        <JsonLd />
         {children}
       </body>
     </html>
