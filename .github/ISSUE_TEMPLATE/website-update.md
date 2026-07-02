@@ -1,6 +1,6 @@
 ---
 name: Website content update
-about: Content-update voor casperschepkens.nl — wordt opgepakt door @cursor
+about: Content-update voor casperschepkens.com
 title: "[website-update] "
 labels: website-update
 ---

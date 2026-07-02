@@ -1,11 +1,11 @@
 ---
 name: website-update
-description: "Portfolio website bijwerken via Cursor Automation webhook. Gebruik wanneer de gebruiker /website-update zegt of content op casperschepkens.nl moet worden bijgewerkt."
+description: "Portfolio website bijwerken via Cursor Automation webhook. Gebruik wanneer de gebruiker /website-update zegt of content op casperschepkens.com moet worden bijgewerkt."
 ---
 
 # Website Update (Claude)
 
-Je helpt Casper zijn portfolio-site bijwerken. Updates gaan via **één MCP-tool** die een Cursor Cloud Agent start.
+Je helpt Casper zijn portfolio-site bijwerken via **één MCP-tool** die een Cursor Cloud Agent start.
 
 **Repo:** `Casper-Schepkens/personal-website`
 
@@ -44,11 +44,11 @@ Roep **`website_update_dispatch`** aan (connector `cursor-webhook`):
 
 ### Stap 5 — Bevestig
 
-Zeg dat Cursor is gestart en dat er een draft PR komt. Link: https://cursor.com/automations
+Zeg dat Cursor is gestart. Link: https://cursor.com/automations — draft PR volgt.
 
 ## Regels
 
-- Gebruik **alleen** `website_update_dispatch` — geen GitHub connector, geen API-keys in chat
+- Gebruik **alleen** `website_update_dispatch`
 - Alle UI-tekst Nederlands
 - Minimale wijzigingen
 

@@ -1,61 +1,49 @@
-# Webhook setup — zo simpel mogelijk
+# Webhook setup
 
 ```
-Claude → MCP (/api/mcp) → Cursor Automation webhook → Cloud Agent → draft PR
+Claude → website_update_dispatch → Cursor Automation webhook → Cloud Agent → draft PR
 ```
 
-Geen GitHub issues. Geen PAT. Drie dingen instellen.
+## Waarom niet rechtstreeks naar Cursor?
 
-## 1. Cursor Automation (5 min)
+Claude kan **geen willekeurige webhooks** aanroepen. Connectors spreken **MCP**. De Cursor webhook is gewoon HTTP POST. Daarom een dunne MCP-laag die POST doet.
 
-[cursor.com/automations](https://cursor.com/automations) → nieuwe automation volgens `.cursor/automations/website-update.md`:
+**Die MCP-laag hoeft NIET op je website te draaien.**
 
-- Trigger: **Webhook**
-- Repo: `personal-website`
-- PR creation: **aan**
+## Aanbevolen: lokaal in Claude Desktop (geen website)
 
-Na opslaan:
-- Webhook URL → `CURSOR_AUTOMATION_WEBHOOK_URL`
-- Auth token → `CURSOR_AUTOMATION_AUTH_TOKEN`
+### 1. Cursor Automation
 
-## 2. Vercel env vars
+[cursor.com/automations](https://cursor.com/automations) — zie `.cursor/automations/website-update.md`
 
-| Variable | Waarde |
-|----------|--------|
-| `CURSOR_AUTOMATION_WEBHOOK_URL` | van automation dashboard |
-| `CURSOR_AUTOMATION_AUTH_TOKEN` | van "Generate auth header" |
-| `MCP_BRIDGE_SECRET` | `openssl rand -hex 32` |
+Kopieer webhook URL + auth token.
 
-Redeploy.
+### 2. Claude Desktop config
 
-## 3. Claude connector
-
-**URL:** `https://casperschepkens.nl/api/mcp`  
-**Auth:** Bearer = `MCP_BRIDGE_SECRET`  
-**Naam:** `cursor-webhook`
-
-**Claude Desktop (mcp-remote):**
+Bestand (macOS): `~/Library/Application Support/Claude/claude_desktop_config.json`
 
 ```json
 {
-  "cursor-webhook": {
-    "command": "npx",
-    "args": [
-      "-y",
-      "mcp-remote",
-      "https://casperschepkens.nl/api/mcp",
-      "--header",
-      "Authorization: Bearer JOUW_MCP_BRIDGE_SECRET"
-    ]
+  "mcpServers": {
+    "cursor-webhook": {
+      "command": "node",
+      "args": ["/ABSOLUUT/PAD/NAAR/personal-website/scripts/cursor-webhook-mcp.mjs"],
+      "env": {
+        "CURSOR_AUTOMATION_WEBHOOK_URL": "https://api2.cursor.sh/automations/webhook/JOUW_ID",
+        "CURSOR_AUTOMATION_AUTH_TOKEN": "crsr_..."
+      }
+    }
   }
 }
 ```
 
-## 4. Skill uploaden
+Herstart Claude Desktop.
+
+### 3. Skill uploaden
 
 `downloads/claude-desktop-website-update/website-update-claude-desktop.zip`
 
-## Test
+### 4. Test
 
 ```
 /website-update
@@ -63,13 +51,22 @@ Redeploy.
 Zet IKnowright summary op: "Test via webhook"
 ```
 
-→ [cursor.com/automations](https://cursor.com/automations) → draft PR
+---
+
+## Optioneel: via website (alleen voor claude.ai in browser)
+
+Als je Claude in de **browser** gebruikt zonder Desktop, heb je een publieke MCP-URL nodig. Dan pas:
+
+- Deploy `/api/mcp` op `casperschepkens.com`
+- Vercel env: `CURSOR_AUTOMATION_WEBHOOK_URL`, `CURSOR_AUTOMATION_AUTH_TOKEN`, `MCP_BRIDGE_SECRET`
+- Connector: `https://casperschepkens.com/api/mcp` + Bearer secret
+
+Voor Claude Desktop: **skip dit** — lokaal script is simpeler.
 
 ## Troubleshooting
 
 | Probleem | Fix |
 |----------|-----|
-| MCP 401 | `MCP_BRIDGE_SECRET` matcht niet |
-| Webhook 401 | Auth token opnieuw genereren in automation |
-| Agent start niet | Repo gekoppeld in automation? |
-| Geen PR | Check run logs in automations dashboard |
+| Tool niet zichtbaar | Herstart Claude; check pad in config |
+| Webhook 401 | Auth token opnieuw genereren |
+| Agent start niet | Repo in automation gekoppeld? |

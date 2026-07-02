@@ -20,7 +20,7 @@ Single service: the Next.js app.
 
 ### Website content updates
 
-Claude → MCP (`/api/mcp`) → Cursor Automation webhook → Cloud Agent → draft PR.
+Claude → MCP (`scripts/cursor-webhook-mcp.mjs` lokaal, of optioneel `/api/mcp` op casperschepkens.com) → Cursor Automation webhook → draft PR.
 
 - **Claude skill:** `.claude/skills/website-update/`
 - **Cursor skill:** `.cursor/skills/website-update/`

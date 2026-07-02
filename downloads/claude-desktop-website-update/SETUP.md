@@ -6,27 +6,40 @@
 /website-update → MCP tool → Cursor webhook → Cloud Agent → draft PR
 ```
 
-## Setup (3 stappen)
+**Geen website nodig** — alles draait lokaal in Claude Desktop.
+
+## Setup
 
 ### 1. Cursor Automation
 
-[cursor.com/automations](https://cursor.com/automations) — zie `.cursor/automations/website-update.md` in de repo.
+[cursor.com/automations](https://cursor.com/automations) — zie `.cursor/automations/website-update.md`
 
-Na opslaan: webhook URL + auth token → Vercel env vars.
+Webhook URL + auth token kopiëren.
 
-### 2. Vercel env vars + redeploy
+### 2. Claude Desktop MCP config
 
-| Variable | Waarde |
-|----------|--------|
-| `CURSOR_AUTOMATION_WEBHOOK_URL` | van automation dashboard |
-| `CURSOR_AUTOMATION_AUTH_TOKEN` | van "Generate auth header" |
-| `MCP_BRIDGE_SECRET` | `openssl rand -hex 32` |
+`~/Library/Application Support/Claude/claude_desktop_config.json`:
 
-### 3. Claude
+```json
+{
+  "mcpServers": {
+    "cursor-webhook": {
+      "command": "node",
+      "args": ["/ABSOLUUT/PAD/NAAR/personal-website/scripts/cursor-webhook-mcp.mjs"],
+      "env": {
+        "CURSOR_AUTOMATION_WEBHOOK_URL": "https://api2.cursor.sh/automations/webhook/...",
+        "CURSOR_AUTOMATION_AUTH_TOKEN": "crsr_..."
+      }
+    }
+  }
+}
+```
 
-- Upload **`website-update-claude-desktop.zip`** (Skills)
-- Connector: `https://casperschepkens.nl/api/mcp` + Bearer secret
-- Naam connector: `cursor-webhook`
+Herstart Claude Desktop.
+
+### 3. Skill uploaden
+
+Upload **`website-update-claude-desktop.zip`**
 
 ## Test
 
@@ -36,4 +49,4 @@ Na opslaan: webhook URL + auth token → Vercel env vars.
 Zet IKnowright summary op: "Test via webhook"
 ```
 
-Zie `website-update/references/webhook-setup.md` in de zip voor details.
+Zie `website-update/references/webhook-setup.md` voor troubleshooting.
