@@ -1,0 +1,21 @@
+{
+  "name": "claude-cursor-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP bridge: Claude roept Cursor aan voor portfolio website-updates",
+  "bin": {
+    "claude-cursor-bridge": "./src/mcp-server.js"
+  },
+  "scripts": {
+    "start": "node src/mcp-server.js",
+    "start:http": "node src/http-server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "^3.24.2"
+  }
+}

@@ -110,7 +110,7 @@ Als de prompt een JSON-blok of gestructureerde brief bevat:
 2. Voer alle `changes` uit in logische volgorde
 3. Negeer velden die `null` zijn of ontbreken — die blijven ongewijzigd
 
-Zie `references/claude-bridge.md` voor hoe Claude deze spec kan genereren en Cursor kan aanroepen.
+Zie `references/claude-bridge.md` voor de volledige Claude → Cursor setup (MCP bridge, Automation webhook, of GitHub dispatch).
 
 ## Referenties
 

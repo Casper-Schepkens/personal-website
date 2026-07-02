@@ -1,0 +1,69 @@
+name: Website update via Cursor
+
+on:
+  repository_dispatch:
+    types: [website-update]
+  workflow_dispatch:
+    inputs:
+      update_spec:
+        description: JSON update-spec (version 1, summary, changes[])
+        required: true
+        type: string
+
+jobs:
+  trigger-cursor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cursor Cloud Agent
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          REPO_URL: https://github.com/${{ github.repository }}
+          BASE_REF: master
+          UPDATE_SPEC: ${{ github.event.client_payload.update_spec || inputs.update_spec }}
+        run: |
+          if [ -z "$CURSOR_API_KEY" ]; then
+            echo "Error: CURSOR_API_KEY secret is not configured"
+            exit 1
+          fi
+
+          PROMPT=$(cat <<EOF
+          Voer de website-update skill uit (.cursor/skills/website-update/SKILL.md).
+
+          Instructies:
+          - Pas alleen content aan (content/, messages/nl.json)
+          - Volg references/update-spec.md
+          - Draai npm run lint
+          - Commit op een cursor/* branch en open een draft PR
+
+          Update-spec:
+          ${UPDATE_SPEC}
+          EOF
+          )
+
+          payload=$(jq -n \
+            --arg text "$PROMPT" \
+            --arg url "$REPO_URL" \
+            --arg ref "$BASE_REF" \
+            '{
+              name: "Website update",
+              prompt: { text: $text },
+              repos: [{ url: $url, startingRef: $ref }],
+              autoCreatePR: true
+            }')
+
+          response=$(curl -sS --request POST \
+            --url "https://api.cursor.com/v1/agents" \
+            -u "${CURSOR_API_KEY}:" \
+            --header "Content-Type: application/json" \
+            --data "$payload")
+
+          echo "$response" | jq .
+
+          agent_id=$(echo "$response" | jq -r '.agent.id // empty')
+          if [ -z "$agent_id" ]; then
+            echo "Failed to start Cursor agent"
+            exit 1
+          fi
+
+          echo "Cursor agent started: $agent_id"
+          echo "Track at: https://cursor.com/agents"

@@ -1,80 +1,134 @@
-# Claude → Cursor brug
+# Claude → Cursor: volledig automatisch
 
-Claude draait buiten Cursor en kan de IDE niet direct aansturen. Er zijn drie praktische manieren om updates door te geven.
+Doel: in Claude `/website-update` typen → Cursor past de site aan → draft PR verschijnt. Geen copy-paste.
 
-## Optie A — Copy-paste (snelst, geen setup)
+## Overzicht
 
-1. Praat met Claude over wat er moet veranderen
-2. Vraag Claude om een **update-spec JSON** (zie `update-spec.md`) of een korte Nederlandse brief
-3. Open Cursor in deze repo
-4. Typ `/website-update` en plak de output
+| Methode | Automatisch? | Extra deploy? |
+|---------|--------------|---------------|
+| **MCP bridge** (aanbevolen) | Ja | `npm install` in integrations/ |
+| **Cursor Automation webhook** | Ja | Automation in dashboard |
+| **GitHub repository_dispatch** | Ja | Alleen `CURSOR_API_KEY` secret |
+| Copy-paste in Cursor | Nee | Geen |
 
-**Claude system prompt (plak in een Claude Project):**
+## Aanbevolen setup
 
-```
-Je helpt Casper zijn portfolio-site bijwerken. De site gebruikt MDX in content/projects/ en content/roadmap/, plus messages/nl.json voor UI-tekst.
+### Stap 1 — Cursor API key + GitHub
 
-Wanneer Casper een update wil:
-1. Stel verduidelijkende vragen als info ontbreekt
-2. Lever een JSON update-spec volgens dit schema: version 1, summary, changes[] met types project_update | project_new | roadmap_new | ui_text | about_skills
-3. Voeg onder de JSON een korte Nederlandse samenvatting
-4. Zeg tegen Casper: "Plak dit in Cursor met /website-update"
+1. [cursor.com/dashboard](https://cursor.com/dashboard) → **API Keys** → nieuwe key
+2. **Integrations** → GitHub → repo `personal-website` toegang geven
+3. GitHub repo → **Settings → Secrets** → `CURSOR_API_KEY`
 
-Regels:
-- Alle UI-tekst in het Nederlands
-- Datums als YYYY-MM
-- status alleen "active" of "completed"
-- Minimale wijzigingen; alleen wat gevraagd is
-```
-
-## Optie B — GitHub Issue + Cursor Cloud Agent (semi-automatisch)
-
-1. Claude genereert de update-spec of issue-tekst
-2. Maak een GitHub issue aan (handmatig of via Claude met GitHub-integratie)
-3. Start een Cloud Agent:
-   - Comment `@cursor` op het issue, of
-   - Roep de [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints) aan
-
-**API-voorbeeld:**
+### Stap 2 — MCP bridge
 
 ```bash
-curl --request POST \
-  --url https://api.cursor.com/v1/agents \
-  -u "$CURSOR_API_KEY:" \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "prompt": {
-      "text": "Voer /website-update uit met deze spec:\n\n<PASTE JSON HERE>\n\nVolg de skill website-update in .cursor/skills/. Commit op een feature branch en open een draft PR."
-    },
-    "repos": [{ "url": "https://github.com/<owner>/<repo>", "startingRef": "master" }],
-    "autoCreatePR": true
-  }'
+cd integrations/claude-cursor-bridge
+npm install
+cp .env.example .env
+# Vul CURSOR_API_KEY in
 ```
 
-Gebruik `scripts/trigger-website-update.sh` (indien aanwezig) om de curl-call te vereenvoudigen.
+Koppel aan Claude Code of Claude Desktop:
 
-## Optie C — Geplande check-in (Cursor Automations)
+```bash
+# Vanuit repo-root
+cp .mcp.json.example .mcp.json
+# Pas CURSOR_API_KEY aan (of gebruik env var)
+```
 
-Voor periodieke reviews ("welke projecten zijn verouderd?"):
+Herstart Claude. De tool `website_update` verschijnt in de connector-lijst.
 
-1. Cursor Dashboard → Automations
-2. Trigger: wekelijks of bij GitHub-event
-3. Prompt: "Lees content/projects/, vergelijk met recente commits/issues, stel updates voor of voer /website-update uit als er een spec in issue #X staat."
+### Stap 3 — Claude Project instructies
 
-## Aanbevolen flow voor Casper
+Maak een Claude Project "Portfolio" en plak:
 
-| Situatie | Aanpak |
-|----------|--------|
-| Snelle content-tweak | Optie A |
-| Grotere update met review | Optie B (PR) |
-| Periodieke onderhoudsronde | Optie C |
+```
+Je bent de assistent voor het bijwerken van casperschepkens.nl.
 
-## Wat Claude wél en niet kan
+Wanneer ik /website-update zeg of vraag de site bij te werken:
+1. Vraag ontbrekende details (max 2 vragen)
+2. Bouw een JSON update-spec (version 1, summary, changes[])
+3. Roep de tool website_update aan met die spec
+4. Bevestig met link naar https://cursor.com/agents
 
-| Kan | Kan niet |
-|-----|----------|
-| Update-spec genereren | Direct bestanden in repo wijzigen (zonder GitHub/API) |
-| Issue-tekst schrijven | Cursor skill laden zonder dat jij Cursor start |
-| Vragen stellen over ontbrekende info | `npm run lint` draaien |
+Schema: zie update-spec in de repo (.cursor/skills/website-update/references/update-spec.md)
+Alle UI-tekst Nederlands. Datums YYYY-MM.
+```
 
-De **update-spec** is het contract tussen Claude en Cursor: houd het formaat stabiel zodat beide kanten het begrijpen.
+Upload als project knowledge: `references/update-spec.md` en `references/update-examples.md` uit deze skill.
+
+### Stap 4 — Test
+
+```
+/website-update
+
+Vizier-project: ik ben gestopt per juni 2026. Zet status op completed en voeg roadmap-item toe.
+```
+
+Verwacht: Claude roept `website_update` → Cursor agent start → draft PR binnen enkele minuten.
+
+---
+
+## Alternatief: Cursor Automation (webhook)
+
+Handig als je al Automations gebruikt of MCP niet wilt draaien.
+
+1. Maak automation op [cursor.com/automations](https://cursor.com/automations) volgens `.cursor/automations/website-update.md`
+2. Trigger: **Webhook**, repo: `personal-website`
+3. Kopieer webhook URL + auth token
+4. In `integrations/claude-cursor-bridge/.env`:
+   ```
+   CURSOR_MODE=automation
+   CURSOR_AUTOMATION_WEBHOOK_URL=https://api2.cursor.sh/automations/webhook/...
+   CURSOR_AUTOMATION_AUTH_TOKEN=crsr_...
+   ```
+
+De MCP tool stuurt dan naar de Automation i.p.v. de Agents API.
+
+---
+
+## Alternatief: GitHub-only (claude.ai web, geen lokale MCP)
+
+Als je Claude in de browser gebruikt zonder Desktop/Code:
+
+1. Zet `CURSOR_API_KEY` als GitHub secret (stap 1)
+2. Workflow `.github/workflows/website-update.yml` is al aanwezig
+3. Geef Claude GitHub-connector toegang tot de repo
+4. Project instructie:
+
+```
+Na het maken van de update-spec JSON, dispatch een GitHub repository_dispatch:
+- event_type: website-update
+- client_payload.update_spec: <de JSON als string>
+```
+
+Claude maakt de dispatch → GitHub Action → Cursor API → PR.
+
+---
+
+## Wat gebeurt er in Cursor?
+
+De Cloud Agent (of Automation):
+
+1. Clonet `personal-website`
+2. Leest `.cursor/skills/website-update/SKILL.md`
+3. Past MDX / `messages/nl.json` aan
+4. Draait `npm run lint`
+5. Pusht naar `cursor/...` branch
+6. Opent draft PR
+
+Jij reviewt en merged.
+
+---
+
+## Troubleshooting
+
+| Symptoom | Fix |
+|----------|-----|
+| Claude roept tool niet aan | Check of MCP server connected is; vermeld expliciet `/website-update` |
+| `CURSOR_API_KEY is not set` | Env var in `.mcp.json` of shell |
+| Automation 401 | Auth token opnieuw genereren in dashboard |
+| Agent kan repo niet clonen | GitHub-integratie in Cursor dashboard |
+| Geen draft PR | Check agent run op cursor.com/agents |
+
+Zie ook: `integrations/claude-cursor-bridge/README.md`
