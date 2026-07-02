@@ -18,11 +18,6 @@
 .DS_Store
 *.pem
 
-# MCP bridge
-integrations/claude-cursor-bridge/node_modules/
-integrations/claude-cursor-bridge/.env
-.mcp.json
-
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -1,31 +1,98 @@
 ---
 name: website-update
-description: "Start een automatische portfolio website-update via Cursor. Gebruik wanneer de gebruiker /website-update zegt, een project van fase verandert, of content op casperschepkens.nl moet worden bijgewerkt. Roep ALTIJD eerst de tool website_update aan na het samenstellen van een update-spec."
+description: "Portfolio website bijwerken via GitHub + @cursor. Gebruik wanneer de gebruiker /website-update zegt, een project van fase verandert, of content op casperschepkens.nl moet worden bijgewerkt."
 ---
 
 # Website Update (Claude)
 
-Je helpt Casper zijn portfolio-site bijwerken. De site draait op Next.js met MDX in `content/projects/`, `content/roadmap/` en UI-tekst in `messages/nl.json`.
+Je helpt Casper zijn portfolio-site bijwerken. Wijzigingen gaan via **GitHub issues + `@cursor`** — geen API-keys, geen MCP.
+
+**Repo:** `Casper-Schepkens/personal-website`
 
 ## Commando: /website-update
 
-Wanneer de gebruiker `/website-update` typt of vraagt de site bij te werken:
+Wanneer de gebruiker `/website-update` typt of de site wil bijwerken:
 
-1. **Verzamel info** — welk project, welke fase, welke tekst? Stel max. 2 gerichte vragen als iets ontbreekt.
-2. **Bouw update-spec** — JSON volgens het schema in `update-spec.md` (version 1, summary, changes[]).
-3. **Toon samenvatting** — kort in het Nederlands wat je gaat wijzigen.
-4. **Start Cursor** — roep de tool `website_update` aan met de volledige `update_spec`.
-5. **Bevestig** — geef de agent-ID en link naar https://cursor.com/agents. Zeg dat er een draft PR komt.
+### Stap 1 — Verzamel info
 
-## Regels voor de update-spec
+Stel max. 2 gerichte vragen als iets ontbreekt (welk project, welke fase, welke tekst).
+
+### Stap 2 — Bouw update-spec
+
+JSON volgens schema (version 1, summary, changes[]). Regels:
 
 - Alle UI-tekst in het Nederlands
 - Datums als `YYYY-MM`
 - `status` alleen `"active"` of `"completed"`
-- Minimale wijzigingen — alleen wat gevraagd is
 - Change types: `project_update`, `project_new`, `roadmap_new`, `ui_text`, `about_skills`
 
-## Voorbeeld change — projectfase
+### Stap 3 — Toon samenvatting
+
+Kort in het Nederlands wat je gaat wijzigen. Vraag bevestiging als de wijziging groot of onomkeerbaar is.
+
+### Stap 4 — Maak GitHub issue
+
+**Vereist:** GitHub-connector met schrijftoegang tot `personal-website`.
+
+| Veld | Waarde |
+|------|--------|
+| **Title** | `[website-update] {summary}` |
+| **Labels** | `website-update` |
+| **Body** | Exact format hieronder |
+
+```markdown
+## Samenvatting
+
+{summary in het Nederlands}
+
+## Update-spec
+
+<!-- website-update-spec: do not edit markers -->
+```json
+{volledige JSON, pretty-printed}
+```
+<!-- /website-update-spec -->
+
+## Checklist
+
+- [ ] Alleen content/ en messages/nl.json
+- [ ] npm run lint
+- [ ] Draft PR
+```
+
+### Stap 5 — Comment met @cursor
+
+Direct na het issue, plaats **één comment** op dat issue:
+
+```
+@cursor
+
+Voer de website-update skill uit: `.cursor/skills/website-update/SKILL.md`
+
+Lees de update-spec tussen de `website-update-spec` markers in dit issue.
+Pas alleen `content/` en `messages/nl.json` aan.
+Draai `npm run lint`, commit op een `cursor/*` branch, en open een draft PR.
+
+Sluit dit issue niet — laat Casper de PR reviewen.
+```
+
+### Stap 6 — Bevestig aan Casper
+
+Geef:
+- Link naar het GitHub issue
+- Korte samenvatting van wat Cursor gaat doen
+- “Cursor start een Cloud Agent; je krijgt een draft PR op GitHub.”
+
+## Als GitHub-connector niet beschikbaar is
+
+Geef Casper:
+1. De volledige issue body (copy-paste klaar)
+2. De `@cursor` comment (copy-paste klaar)
+3. Instructie: “Maak het issue handmatig op GitHub en plak de comment.”
+
+**Gebruik geen API, MCP of repository_dispatch** — alleen GitHub issues + `@cursor`.
+
+## Voorbeeld update-spec
 
 ```json
 {
@@ -54,14 +121,8 @@ Wanneer de gebruiker `/website-update` typt of vraagt de site bij te werken:
 }
 ```
 
-## Zonder MCP-tool (fallback)
-
-Als `website_update` niet beschikbaar is, gebruik de GitHub connector:
-
-1. Dispatch `repository_dispatch` event `website-update` met `update_spec` in client_payload
-2. Of maak een issue met label `website-update` en de JSON in de body
-
-## Referenties in de repo
+## Referenties
 
 - `.cursor/skills/website-update/references/update-spec.md`
 - `.cursor/skills/website-update/references/update-examples.md`
+- `.cursor/skills/website-update/references/github-workflow.md`

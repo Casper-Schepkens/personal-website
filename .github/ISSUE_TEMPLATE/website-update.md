@@ -1,33 +1,44 @@
 ---
 name: Website content update
-about: Vraag een content-update aan voor de portfolio-site (projectfase, roadmap, teksten)
+about: Content-update voor casperschepkens.nl — wordt opgepakt door @cursor
 title: "[website-update] "
 labels: website-update
 ---
 
-## Wat moet er veranderen?
+## Samenvatting
 
-<!-- Bijv.: IKnowright is nu in beta, update status en beschrijving -->
+<!-- Korte beschrijving in het Nederlands -->
 
-## Betrokken project(en)
+## Update-spec
 
-- Slug(s): <!-- bijv. iknowright -->
-- Type update: <!-- project_update | project_new | roadmap_new | ui_text -->
-
-## Nieuwe inhoud (vrij tekst of JSON)
-
-<!-- Plak hier een update-spec JSON (zie .cursor/skills/website-update/references/update-spec.md) of beschrijf in gewone taal -->
-
+<!-- website-update-spec: do not edit markers -->
 ```json
-
+{
+  "version": 1,
+  "summary": "",
+  "changes": []
+}
 ```
+<!-- /website-update-spec -->
 
-## Optioneel
+## Checklist
 
-- [ ] Ook roadmap-item toevoegen
-- [ ] Homepage featured/priority aanpassen
-- [ ] Cover image wijzigen (pad in public/images/)
+- [ ] Alleen `content/` en `messages/nl.json`
+- [ ] `npm run lint`
+- [ ] Draft PR
 
 ---
 
-**Cursor:** comment `@cursor` op dit issue of gebruik `scripts/trigger-website-update.sh` met de JSON hierboven.
+**Na het aanmaken:** plaats een comment:
+
+```
+@cursor
+
+Voer de website-update skill uit: `.cursor/skills/website-update/SKILL.md`
+
+Lees de update-spec tussen de `website-update-spec` markers in dit issue.
+Pas alleen `content/` en `messages/nl.json` aan.
+Draai `npm run lint`, commit op een `cursor/*` branch, en open een draft PR.
+
+Sluit dit issue niet — laat Casper de PR reviewen.
+```
