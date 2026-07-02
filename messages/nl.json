@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "siteName": "Casper Schepkens",
+    "description": "Student, ondernemer en maker. Portfolio van projecten en accomplishments."
+  },
+  "nav": {
+    "home": "Home",
+    "projects": "Projecten",
+    "about": "Over mij",
+    "roadmap": "Roadmap"
+  },
+  "home": {
+    "tagline": "Student · Ondernemer",
+    "intro": "Ik bouw software, werk als freelancer en onderneem tegelijk. Deze site is mijn visitekaartje — wie ik ben, waar ik mee bezig ben, en wat ik heb gerealiseerd.",
+    "featuredTitle": "Uitgelichte projecten",
+    "featuredSubtitle": "Waar ik nu energie in steek",
+    "currentlyTitle": "Waar ik nu mee bezig ben",
+    "currentlySubtitle": "Actieve projecten en focus",
+    "viewAll": "Alle projecten",
+    "viewProject": "Bekijk project"
+  },
+  "projects": {
+    "title": "Projecten",
+    "subtitle": "Alles waar ik aan werk — van side projects tot client work",
+    "filterStatus": "Status",
+    "filterTags": "Tags",
+    "all": "Alles",
+    "active": "Actief",
+    "completed": "Afgerond",
+    "noResults": "Geen projecten gevonden met deze filters.",
+    "back": "Terug naar projecten"
+  },
+  "about": {
+    "title": "Over mij",
+    "subtitle": "Wie ik ben en wat ik kan",
+    "storyTitle": "Verhaal",
+    "story": "Ik ben Casper — student, ondernemer en developer. Ik combineer studie met freelance werk en eigen projecten. Ik houd van bouwen: van idee naar iets dat echt gebruikt wordt.",
+    "skillsTitle": "Skills & tools",
+    "skillsIntro": "Een selectie van waar ik mee werk. De lijst groeit — net als ik.",
+    "skills": {
+      "dev": ["JavaScript", "Next.js", "React", "Node.js", "Tailwind CSS"],
+      "tools": ["Git", "Figma", "Vercel", "Supabase"],
+      "other": ["Freelance", "Ondernemerschap", "Product denken"]
+    }
+  },
+  "roadmap": {
+    "title": "Roadmap",
+    "subtitle": "Mijn pad — studie, ondernemerschap en milestones",
+    "types": {
+      "education": "Opleiding",
+      "work": "Werk",
+      "milestone": "Milestone",
+      "project": "Project"
+    }
+  },
+  "footer": {
+    "socialNote": "Geen Instagram, Facebook of TikTok — wel bereikbaar via e-mail en LinkedIn.",
+    "rights": "Alle rechten voorbehouden."
+  },
+  "common": {
+    "live": "Live",
+    "repo": "Repository",
+    "role": "Rol",
+    "period": "Periode",
+    "tools": "Tools",
+    "present": "heden"
+  }
+}

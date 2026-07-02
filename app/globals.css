@@ -1,0 +1,56 @@
+/*
+ * THEME — gebaseerd op visitekaartje (resources/)
+ * Achtergrond: lichtgrijs #E8E8E8 | Donker: #2A2A2A
+ * Tekst: charcoal #2D2D2D | Donker modus: #D1D1D1
+ */
+:root {
+  --color-accent: #2d2d2d;
+  --color-accent-hover: #1a1a1a;
+
+  --color-background: #e8e8e8;
+  --color-foreground: #2d2d2d;
+  --color-muted: #6b6b6b;
+  --color-border: #d4d4d4;
+  --color-surface: #f2f2f2;
+  --color-surface-hover: #dedede;
+}
+
+.dark {
+  --color-accent: #d1d1d1;
+  --color-accent-hover: #ededed;
+
+  --color-background: #2a2a2a;
+  --color-foreground: #d1d1d1;
+  --color-muted: #9a9a9a;
+  --color-border: #3d3d3d;
+  --color-surface: #333333;
+  --color-surface-hover: #3a3a3a;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-foreground) 20%, transparent);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .tracking-brand {
+    letter-spacing: 0.2em;
+  }
+}
