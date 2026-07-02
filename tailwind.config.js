@@ -16,6 +16,7 @@ module.exports = {
         "accent-hover": "var(--color-accent-hover)",
         surface: "var(--color-surface)",
         "surface-hover": "var(--color-surface-hover)",
+        "logo-tile": "var(--color-logo-tile)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],
