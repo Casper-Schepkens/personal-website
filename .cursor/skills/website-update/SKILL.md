@@ -101,7 +101,8 @@ Rapporteer in PR-beschrijving en issue-comment:
 
 - `references/update-spec.md` — JSON-schema
 - `references/update-examples.md` — voorbeelden
-- `references/github-workflow.md` — Claude → GitHub → @cursor flow
+- `references/github-workflow.md` — Claude → MCP → GitHub → @cursor flow
+- `references/github-relay-setup.md` — PAT, Vercel env, connector URL
 - `references/content-schema.md` — frontmatter-velden
 
 ## Wat je NIET doet

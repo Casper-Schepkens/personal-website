@@ -20,9 +20,10 @@ Single service: the Next.js app.
 
 ### Website content updates
 
-Content updates (project phases, roadmap, UI text) use the `website-update` skills:
+Content updates use the `website-update` skills with a **GitHub relay MCP** (`/api/mcp`):
 
-- **Claude:** `.claude/skills/website-update/` — creates GitHub issue + `@cursor` comment
-- **Cursor:** `.cursor/skills/website-update/` — executes changes when triggered via `@cursor` on a `website-update` issue
+- **Claude:** `.claude/skills/website-update/` — calls `website_update_dispatch` MCP tool
+- **Server:** `lib/github-relay.js` + `app/api/[transport]/route.js` — creates issues with PAT
+- **Cursor:** `.cursor/skills/website-update/` — executes changes when triggered via `@cursor`
 
-See `.cursor/skills/website-update/references/github-workflow.md` for setup.
+Requires Vercel env: `GITHUB_PAT`, `MCP_BRIDGE_SECRET`. See `references/github-relay-setup.md`.

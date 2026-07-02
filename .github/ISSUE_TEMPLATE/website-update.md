@@ -29,7 +29,7 @@ labels: website-update
 
 ---
 
-**Na het aanmaken:** plaats een comment:
+**Na deploy:** Claude gebruikt MCP tool `website_update_dispatch` — geen handmatige `@cursor` comment nodig als de skill correct draait. Bij handmatige issues: plaats onderstaande comment.
 
 ```
 @cursor
