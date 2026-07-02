@@ -12,32 +12,17 @@ Maak deze automation aan op [cursor.com/automations](https://cursor.com/automati
 | **Branch** | `master` |
 | **Tools** | Pull request creation (aan) |
 
-## Prompt (plak als instructies)
+## Agent instructions
 
-```
-Je voert een website content-update uit op de Casper Schepkens portfolio-site.
+**Plak de volledige prompt uit:** `website-update-agent-instructions.md`
 
-De webhook payload bevat:
-- summary: korte beschrijving
-- update_spec: JSON met version 1, summary, changes[]
-
-Werkstappen:
-1. Lees .cursor/skills/website-update/SKILL.md en volg die workflow
-2. Parse update_spec volgens references/update-spec.md
-3. Pas alleen content/ en messages/nl.json aan
-4. Alle UI-tekst blijft Nederlands
-5. Draai npm run lint
-6. Commit op een cursor/* branch en open een draft PR
-
-Webhook payload:
-{{payload}}
-```
+Die file bevat alles wat de agent moet weten over payload, change types, bestanden en PR-afronding.
 
 ## Na opslaan
 
-1. Kopieer **webhook URL** → Vercel env `CURSOR_AUTOMATION_WEBHOOK_URL`
-2. Klik **Generate auth header** → token zonder "Bearer " → `CURSOR_AUTOMATION_AUTH_TOKEN`
-3. Redeploy Vercel
+1. Kopieer **webhook URL** → `CURSOR_AUTOMATION_WEBHOOK_URL` (lokaal MCP config of optioneel Vercel)
+2. **Generate auth header** → `CURSOR_AUTOMATION_AUTH_TOKEN`
+3. Configureer Claude Desktop MCP — zie `references/webhook-setup.md`
 
 ## Test (handmatig)
 

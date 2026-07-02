@@ -27,4 +27,6 @@ Claude → MCP (`scripts/cursor-webhook-mcp.mjs` lokaal, of optioneel `/api/mcp`
 - **Automation template:** `.cursor/automations/website-update.md`
 - **Setup:** `references/webhook-setup.md`
 
-Vercel env: `CURSOR_AUTOMATION_WEBHOOK_URL`, `CURSOR_AUTOMATION_AUTH_TOKEN`, `MCP_BRIDGE_SECRET`.
+Vercel env: `CURSOR_AUTOMATION_WEBHOOK_URL`, `CURSOR_AUTOMATION_AUTH_TOKEN`, `MCP_BRIDGE_SECRET` (alleen als je `/api/mcp` gebruikt).
+
+**Automation agent prompt:** `.cursor/automations/website-update-agent-instructions.md`
