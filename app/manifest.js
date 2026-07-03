@@ -13,8 +13,13 @@ export default function manifest() {
     lang: "nl",
     icons: [
       {
-        src: "/icon",
-        sizes: "32x32",
+        src: "/images/logo.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+      {
+        src: "/images/logo-dark.png",
+        sizes: "512x512",
         type: "image/png",
       },
     ],
