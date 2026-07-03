@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.casperschepkens.com" }],
+      "destination": "https://casperschepkens.com/:path*",
+      "permanent": true
+    }
+  ]
+}

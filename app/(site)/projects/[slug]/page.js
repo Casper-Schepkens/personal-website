@@ -5,6 +5,7 @@ import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects";
 import { createMetadata } from "@/lib/seo";
 import MDXContent from "@/components/MDXContent";
 import ProjectCoverImage from "@/components/ProjectCoverImage";
+import ProjectJsonLd from "@/components/ProjectJsonLd";
 import { FadeIn } from "@/components/Motion";
 
 export async function generateStaticParams() {
@@ -36,6 +37,7 @@ export default async function ProjectDetailPage({ params }) {
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-16">
+      <ProjectJsonLd project={project} slug={slug} />
       <FadeIn>
         <Link href="/projects" className="text-sm text-muted hover:text-foreground transition-colors">
           ← {content.projects.back}

@@ -1,7 +1,9 @@
 import content from "@/lib/content";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, googleSiteVerification } from "@/lib/seo";
 import JsonLd from "@/components/JsonLd";
 import "./globals.css";
+
+const verification = googleSiteVerification();
 
 export const metadata = {
   ...createMetadata({ description: content.meta.description }),
@@ -9,6 +11,7 @@ export const metadata = {
     default: content.meta.siteName,
     template: `%s | ${content.meta.siteName}`,
   },
+  ...(verification && { verification }),
 };
 
 export default function RootLayout({ children }) {
