@@ -14,10 +14,20 @@
     "intro": "Ik weet wat ik wil en ben constant bezig met serieuze projecten — software bouwen, ondernemen, freelance. Op deze site laat ik zien waar ik nu mee bezig ben en wat ik al heb neergezet.",
     "featuredTitle": "Uitgelichte projecten",
     "featuredSubtitle": "Waar ik nu energie in steek",
-    "currentlyTitle": "Waar ik nu mee bezig ben",
-    "currentlySubtitle": "Actieve projecten en focus",
     "viewAll": "Alle projecten",
-    "viewProject": "Bekijk project"
+    "viewProject": "Bekijk project",
+    "nowTitle": "Nu",
+    "now": "Ik start aan handelsingenieur aan de UGent en houd tegelijk IKnowRight en Jewelry Software draaiende. Daarnaast doe ik freelance IT-werk bij Vizier — en bouw ik aan deze site als overzicht van alles wat speelt.",
+    "aboutTeaserTitle": "Over mij",
+    "aboutTeaser": "Ik ben 18, uit Brugge — ondernemer en student. Ik zoek problemen die het waard zijn om op te lossen, van TikTok-marketing tot software voor juweliers. Niet de technologie omwille van de technologie, maar het moment waarop iets begint te werken in de praktijk.",
+    "aboutTeaserLink": "Lees het volledige verhaal",
+    "roadmapTitle": "Op het pad",
+    "roadmapSubtitle": "Recente milestones op de tijdlijn",
+    "roadmapLink": "Volledige roadmap",
+    "ctaTitle": "Samenwerken?",
+    "ctaText": "Ik ben open voor een gesprek over een project, idee of samenwerking.",
+    "ctaEmail": "Mail me",
+    "ctaLinkedIn": "LinkedIn"
   },
   "projects": {
     "title": "Projecten",
