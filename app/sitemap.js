@@ -1,5 +1,5 @@
 import { siteConfig } from "@/lib/site";
-import { getAllProjectSlugs } from "@/lib/projects";
+import { getAllProjectSlugs, getProjectLastModified } from "@/lib/projects";
 
 export default function sitemap() {
   const staticRoutes = ["", "/projects", "/about", "/roadmap"].map((path) => ({
@@ -11,7 +11,7 @@ export default function sitemap() {
 
   const projectRoutes = getAllProjectSlugs().map((slug) => ({
     url: `${siteConfig.url}/projects/${slug}`,
-    lastModified: new Date(),
+    lastModified: getProjectLastModified(slug),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
