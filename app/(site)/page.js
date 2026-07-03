@@ -1,13 +1,15 @@
 import Link from "next/link";
 import content from "@/lib/content";
-import { getFeaturedProjects, getActiveProjects } from "@/lib/projects";
+import { getFeaturedProjects } from "@/lib/projects";
+import { getRecentRoadmapItems } from "@/lib/roadmap";
+import { siteConfig } from "@/lib/site";
 import { HeroText, SectionHeading, FadeIn } from "@/components/Motion";
 import ProjectCard from "@/components/ProjectCard";
 import LogoMark from "@/components/LogoMark";
 
 export default function HomePage() {
-  const featured = getFeaturedProjects(4);
-  const active = getActiveProjects(2);
+  const featured = getFeaturedProjects(2);
+  const recentMilestones = getRecentRoadmapItems(4);
 
   return (
     <div className="mx-auto max-w-5xl px-6">
@@ -50,32 +52,90 @@ export default function HomePage() {
         </FadeIn>
       </section>
 
-      {active.length > 0 && (
-        <section className="pb-24">
-          <SectionHeading
-            title={content.home.currentlyTitle}
-            subtitle={content.home.currentlySubtitle}
-          />
-          <div className="grid gap-4">
-            {active.map((project, i) => (
-              <FadeIn key={project.slug} delay={i * 0.1}>
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="group flex items-center justify-between rounded-xl border border-border bg-surface p-5 transition-all hover:border-foreground/20 hover:shadow-sm"
-                >
-                  <div>
-                    <p className="font-display text-xl group-hover:text-foreground/80 transition-colors">
-                      {project.title}
-                    </p>
-                    <p className="mt-1 text-sm text-muted">{project.summary}</p>
+      <section className="pb-24">
+        <SectionHeading title={content.home.nowTitle} />
+        <FadeIn>
+          <p className="max-w-2xl text-muted leading-relaxed text-lg">
+            {content.home.now}
+          </p>
+        </FadeIn>
+      </section>
+
+      <section className="pb-24">
+        <SectionHeading title={content.home.aboutTeaserTitle} />
+        <FadeIn>
+          <p className="max-w-2xl text-muted leading-relaxed text-lg">
+            {content.home.aboutTeaser}
+          </p>
+          <Link
+            href="/about"
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline underline-offset-4"
+          >
+            {content.home.aboutTeaserLink} →
+          </Link>
+        </FadeIn>
+      </section>
+
+      <section className="pb-24">
+        <SectionHeading
+          title={content.home.roadmapTitle}
+          subtitle={content.home.roadmapSubtitle}
+        />
+        <div className="relative max-w-2xl">
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-border" aria-hidden />
+          <div className="space-y-6">
+            {recentMilestones.map((item, i) => (
+              <FadeIn key={item.id} delay={i * 0.05}>
+                <div className="relative pl-8">
+                  <span className="absolute left-0 top-1.5 h-[15px] w-[15px] rounded-full border-2 border-foreground bg-background" />
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <time className="text-sm font-medium tabular-nums">{item.date}</time>
+                    <span className="rounded-md bg-surface-hover px-2 py-0.5 text-xs text-muted">
+                      {content.roadmap.types[item.type] ?? item.type}
+                    </span>
                   </div>
-                  <span className="text-muted opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                </Link>
+                  <p className="font-display mt-1 text-lg">{item.title}</p>
+                </div>
               </FadeIn>
             ))}
           </div>
-        </section>
-      )}
+        </div>
+        <FadeIn className="mt-8">
+          <Link
+            href="/roadmap"
+            className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline underline-offset-4"
+          >
+            {content.home.roadmapLink} →
+          </Link>
+        </FadeIn>
+      </section>
+
+      <section className="pb-24">
+        <FadeIn>
+          <div className="rounded-xl border border-border bg-surface p-8 text-center sm:p-10">
+            <h2 className="font-display text-2xl sm:text-3xl">{content.home.ctaTitle}</h2>
+            <p className="mx-auto mt-3 max-w-md text-muted leading-relaxed">
+              {content.home.ctaText}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium hover:border-foreground/30 transition-colors"
+              >
+                {content.home.ctaEmail}
+              </a>
+              <a
+                href={siteConfig.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-lg border border-border bg-background px-4 py-2 text-sm font-medium hover:border-foreground/30 transition-colors"
+              >
+                {content.home.ctaLinkedIn}
+              </a>
+            </div>
+          </div>
+        </FadeIn>
+      </section>
     </div>
   );
 }
