@@ -1,9 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
 import content from "@/lib/content";
 import { getFeaturedProjects, getActiveProjects } from "@/lib/projects";
 import { HeroText, SectionHeading, FadeIn } from "@/components/Motion";
 import ProjectCard from "@/components/ProjectCard";
+import LogoMark from "@/components/LogoMark";
 
 export default function HomePage() {
   const featured = getFeaturedProjects(4);
@@ -14,16 +14,7 @@ export default function HomePage() {
       <section className="py-20 sm:py-28">
         <HeroText>
           <div className="flex flex-col gap-10 sm:flex-row sm:items-center sm:gap-16">
-            <div className="shrink-0">
-              <Image
-                src="/images/logo.png"
-                alt="Casper Schepkens logo"
-                width={160}
-                height={160}
-                className="w-32 sm:w-40 h-auto"
-                priority
-              />
-            </div>
+            <LogoMark size="lg" priority />
             <div>
               <p className="text-sm font-medium uppercase tracking-brand text-muted mb-3">
                 {content.home.tagline}
