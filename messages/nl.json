@@ -32,16 +32,42 @@
   },
   "about": {
     "title": "Over mij",
-    "subtitle": "Wie ik ben en wat ik kan",
+    "subtitle": "Ondernemer en student — ik zoek problemen die het waard zijn om op te lossen",
     "storyTitle": "Verhaal",
-    "story": "Ik ben Casper — student, ondernemer en developer. Ik combineer studie met freelance werk en eigen projecten. Ik houd van bouwen: van idee naar iets dat echt gebruikt wordt.",
-    "skillsTitle": "Skills & tools",
-    "skillsIntro": "Een selectie van waar ik mee werk. De lijst groeit — net als ik.",
-    "skills": {
-      "dev": ["JavaScript", "Next.js", "React", "Node.js", "Tailwind CSS"],
-      "tools": ["Git", "Figma", "Vercel", "Supabase"],
-      "other": ["Freelance", "Ondernemerschap", "Product denken"]
-    }
+    "story": [
+      "Ik ben Casper, 18, uit Brugge. Net afgestudeerd in wetenschappen-wiskunde (8u) en vanaf dit najaar handelsingenieur aan de UGent. Die keuze volgde op een infomoment — bewust gekozen om analytisch te blijven denken én meteen naast de studie te ondernemen, niet eerst afstuderen en dan pas beginnen.",
+      "Ondernemen en bouwen doen al langer mee dan de projecten op deze site. Al op school experimenteerde ik met ideeën en kleine initiatieven — soms mislukt, altijd leerzaam. Wat bleef hangen: ik zag overal ondernemers met een goed product of idee, maar zonder structuur, zichtbaarheid of overzicht. Websites, marketing, interne processen — steeds dezelfde soort knelpunten. Websites werden mijn eerste concrete manier om die problemen aan te pakken.",
+      "Via echte projecten groeide het verder. Met Eliska startte ik Pixel-3 — een mini-onderneming tijdens school, carbon-neutral webdesign voor lokale KMO's. Onze eerste klant was Raj van Brugge Diamond Gallery; die lijn liep door: eerst de website, daarna het voorraadprobleem dat Jewelry Software werd, en later Vizier via hetzelfde netwerk. In april 2025 stapte ik via een Gentrepreneur-event in bij IKnowRight. Sinds juli 2026 factureer ik via mijn eenmanszaak.",
+      "Wat me drijft is niet de technologie op zich. Het is het moment waarop iets dat eerst in iemands hoofd zat — een groeiplan, een voorraadprobleem, een merk dat niemand ziet — begint te werken in de praktijk. Code, content, sales: dat zijn middelen. Het doel is altijd hetzelfde: een echt probleem oplossen voor iemand die er iets mee doet."
+    ],
+    "highlightsTitle": "Waar het meeste van mijn tijd naartoe gaat",
+    "highlights": [
+      {
+        "title": "IKnowRight",
+        "text": "TikTok-marketingbureau voor foodmerken. Ik ben partner met 25% aandeel en richt me op sales, marketing en groei — van ICP en offertes tot klantrelaties. Ik stapte in april 2025 in na een ontmoeting op een Gentrepreneur-event; het bureau is opgericht door Cédric en Milan. Vandaag richten we ons volledig op food brands: merken zichtbaar maken via content die werkt. In het voorjaar van 2026 presenteerden we IKR op een FSA-event in de foodsector — echte pitches, echte feedback van de markt.",
+        "href": "/projects/iknowright",
+        "linkLabel": "Bekijk project"
+      },
+      {
+        "title": "Jewelry Software",
+        "text": "Software voor onafhankelijke juweliers die uitblinken in hun vak, maar het financiële en administratieve deel vaak onderschatten. Het project ontstond via Raj en Brugge Diamond Gallery — eerst een website via Pixel-3, daarna het echte probleem: geen overzicht over voorraad of cashflow. Ik bouwde de tool, landde de eerste betalende klant, en valideer nu bewust of dat probleem breder speelt. Structuur en markt eerst, schaal daarna — niet andersom.",
+        "href": "/projects/jewelry-software",
+        "linkLabel": "Bekijk project"
+      }
+    ],
+    "nowTitle": "Nu",
+    "now": "Ik start aan handelsingenieur en houd tegelijk IKnowRight en Jewelry Software draaiende. Daarnaast doe ik freelance IT-werk voor Vizier — het creatieve bureau van Jan, waar ik via Raj terechtkwam — en bouw ik aan deze site als overzicht van alles wat speelt. Het is veel tegelijk, maar bewust: school is voor mij geen wachtkamer, maar één van de dingen die ik combineer.",
+    "communityTitle": "Ook",
+    "community": "Naast ondernemen zit ik in de Jeugdraad Brugge. Daar leidde ik onder andere een vergadering rond communicatiestrategie — lokaal engagement naast business. Voor mij hoort dat bij hetzelfde: een probleem zien en ergens aan beginnen.",
+    "approachTitle": "Hoe ik werk",
+    "approach": [
+      "Eerst begrijpen wat het echte probleem is — niet wat iemand denkt dat ze nodig hebben",
+      "Structuur en strategie vóór schaal — liever een goed fundament dan snel veel doen zonder richting",
+      "Werken met echte klanten en echte feedback, niet met hypothetische use cases",
+      "Itereren en shippen — je weet pas of iets werkt als het in de echte wereld staat",
+      "AI als hefboom — ik gebruik tools zoals Cursor dagelijks om sneller van idee naar werkend te gaan, zonder kwaliteit op te offeren"
+    ],
+    "roadmapNote": "Meer context over mijn pad — studie, projecten en milestones — vind je op de"
   },
   "roadmap": {
     "title": "Roadmap",

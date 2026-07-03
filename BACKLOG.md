@@ -6,15 +6,15 @@ Werk items **van boven naar beneden** af. Vink af met `[x]` als iets klaar is.
 
 ## 🔴 Hoog — site moet geloofwaardig overkomen
 
-- [ ] **Projectcontent invullen**
+- [x] **Projectcontent invullen**
   - [x] IKnowright — content, cover image, resultaten (klantnamen bevestigd)
   - [x] Jewelry Software — content, cover image, klant Brugge Diamond Gallery
   - [x] Pixel-3 — mini onderneming, Eliska, BDG + Alexamer, presentatie-content
-  - [x] Vizier — basis content + cover (details te verifiëren)
+  - [x] Vizier — content + cover (via Jan / Raj)
   - [x] Zorgbalans — content, rebrand-verhaal, screenshot homepage
   - Bestanden: `content/projects/*.mdx`, afbeeldingen in `public/images/`
 
-- [ ] **About-pagina schrijven**
+- [x] **About-pagina schrijven**
   - Studie, ondernemen, wat je zoekt / waar je naartoe werkt
   - Bestand: `app/(site)/about/page.js` + eventueel copy in `messages/nl.json`
 
@@ -51,9 +51,13 @@ Werk items **van boven naar beneden** af. Vink af met `[x]` als iets klaar is.
 
 ## 🟡 Laag — nice to have v1
 
-- [ ] **Google Search Console**
-  - Site indienen voor indexering
-  - Sitemap: `/sitemap.xml` (al aanwezig)
+- [ ] **SEO & Google-indexering**
+  - Google Search Console: site verifiëren + sitemap indienen (`/sitemap.xml` bestaat al)
+  - Controleren of pagina's geïndexeerd worden (URL-inspectie, coverage-rapport)
+  - Metadata nalopen per pagina: title, description, OG/Twitter (`lib/seo.js`)
+  - `robots.txt` checken (`app/robots.js`)
+  - Structured data overwegen (Person / Portfolio) — optioneel
+  - **Timing:** pas zinvol als About + roadmap klaar zijn (meer indexeerbare content)
 
 - [ ] **Favicon**
   - CS-logo als browser-tab icoon
@@ -86,4 +90,4 @@ Werk items **van boven naar beneden** af. Vink af met `[x]` als iets klaar is.
 | Branch v1 | `initial-changes` → merge naar `master` als klaar |
 | UI-teksten | `messages/nl.json` |
 | Kleuren / theme | `app/globals.css` |
-| SEO | `lib/seo.js`, `lib/site.js` |
+| SEO / indexing | `lib/seo.js`, `lib/site.js`, `app/sitemap.js`, `app/robots.js` — Search Console nog doen |
