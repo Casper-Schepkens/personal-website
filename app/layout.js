@@ -11,6 +11,23 @@ export const metadata = {
     default: content.meta.siteName,
     template: `%s | ${content.meta.siteName}`,
   },
+  icons: {
+    icon: [
+      {
+        url: "/images/logo.png",
+        sizes: "512x512",
+        type: "image/png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/images/logo-dark.png",
+        sizes: "512x512",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    apple: [{ url: "/images/logo.png", sizes: "512x512", type: "image/png" }],
+  },
   ...(verification && { verification }),
 };
 
