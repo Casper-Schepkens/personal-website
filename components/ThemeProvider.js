@@ -37,6 +37,15 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     if (!mounted) return;
     document.documentElement.classList.toggle("dark", isDark);
+
+    let link = document.head.querySelector('link[data-theme-favicon]');
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      link.setAttribute("data-theme-favicon", "");
+      document.head.appendChild(link);
+    }
+    link.href = isDark ? "/images/logo-dark.png" : "/images/logo.png";
   }, [isDark, mounted]);
 
   const toggle = () => {
