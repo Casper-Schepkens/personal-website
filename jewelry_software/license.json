@@ -1,0 +1,55 @@
+{
+  "latest_version": "2.1.3",
+  "shops": {
+    "casper-admin": {
+      "username": "casper",
+      "password": "change-me",
+      "display_name": "Casper Schepkens",
+      "account_type": "admin",
+      "app_enabled": true,
+      "updates_enabled": true,
+      "message": "",
+      "show_message": false
+    },
+    "brugge-diamond-gallery": {
+      "username": "brugge",
+      "password": "change-me",
+      "display_name": "Brugge Diamond Gallery",
+      "account_type": "company",
+      "app_enabled": true,
+      "updates_enabled": true,
+      "message": "Your license has expired. Contact support to renew.",
+      "show_message": true
+    },
+    "another-jewelry-shop": {
+      "username": "demo",
+      "password": "change-me",
+      "display_name": "Another Jewelry Shop",
+      "account_type": "company",
+      "app_enabled": true,
+      "updates_enabled": true,
+      "message": "",
+      "show_message": false
+    },
+    "project-test-new": {
+      "username": "testnew",
+      "password": "test-new-2026",
+      "display_name": "New Client Test Shop",
+      "account_type": "company",
+      "app_enabled": true,
+      "updates_enabled": true,
+      "message": "This test license has been disabled.",
+      "show_message": true
+    },
+    "project-test-existing": {
+      "username": "testexisting",
+      "password": "test-existing-2026",
+      "display_name": "Brugge Diamond Gallery",
+      "account_type": "company",
+      "app_enabled": true,
+      "updates_enabled": true,
+      "message": "This test license has been disabled.",
+      "show_message": true
+    }
+  }
+}
