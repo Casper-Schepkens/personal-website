@@ -16,9 +16,9 @@
       "password": "change-me",
       "display_name": "Brugge Diamond Gallery",
       "account_type": "company",
-      "app_enabled": true,
+      "app_enabled": false,
       "updates_enabled": true,
-      "message": "",
+      "message": "test, change this",
       "show_message": false
     }
   }
