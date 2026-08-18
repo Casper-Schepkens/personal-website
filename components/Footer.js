@@ -31,9 +31,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="mt-8 text-xs text-muted">
-          © {year} Casper Schepkens. {content.footer.rights}
-        </p>
+        <div className="mt-8 flex flex-col gap-1 text-xs text-muted">
+          <p>© {year} Casper Schepkens. {content.footer.rights}</p>
+          <p>BTW: BE 1039.852.371</p>
+        </div>
       </div>
     </footer>
   );
