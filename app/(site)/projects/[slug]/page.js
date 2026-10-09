@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
 
 function formatPeriod(dateStart, dateEnd) {
   const end = dateEnd ?? content.common.present;
-  return `${dateStart} — ${end}`;
+  return `${dateStart} tot ${end}`;
 }
 
 export default async function ProjectDetailPage({ params }) {
